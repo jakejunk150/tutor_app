@@ -9,9 +9,8 @@ export default function WelcomeScreen() {
     <View style={styles.container}>
       <Text style={styles.title}>Welcome to Tutor App</Text>
       <View style={styles.buttonContainer}>
-        <Button title="Tutor" onPress={() => router.push('/tutor')} />
-        <Button title="Student" onPress={() => router.push('/student')} />
-        <Button title="Skip" onPress={() => router.push('/(tabs)/home')} />
+        <Button title="Login" onPress={() => router.push('/login')} />
+        <Button title="Create Account" onPress={() => router.push('/create-account')} />
       </View>
     </View>
   );
@@ -35,4 +34,3 @@ const styles = StyleSheet.create({
     height: 150,
   },
 });
-
