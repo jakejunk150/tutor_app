@@ -28,7 +28,19 @@
         <key>CFBundleURLSchemes</key>
         <array>
           <string>myapp</string>
-          <string>com.anonymous.tutor-app</string>
+          <string>com.medschoolspace.app</string>
+        </array>
+      </dict>
+      <dict>
+        <key>CFBundleURLSchemes</key>
+        <array>
+          <string>com.googleusercontent.apps.901253797103-2recm6q5sq9v1qahrek7rd4a4e8l3kmp</string>
+        </array>
+      </dict>
+      <dict>
+        <key>CFBundleURLSchemes</key>
+        <array>
+          <string>exp+tutorapp</string>
         </array>
       </dict>
     </array>

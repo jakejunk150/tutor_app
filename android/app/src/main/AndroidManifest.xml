@@ -25,7 +25,8 @@
         <category android:name="android.intent.category.DEFAULT"/>
         <category android:name="android.intent.category.BROWSABLE"/>
         <data android:scheme="myapp"/>
-        <data android:scheme="com.anonymous.tutor_app"/>
+        <data android:scheme="com.medschoolspace.app"/>
+        <data android:scheme="exp+tutorapp"/>
       </intent-filter>
     </activity>
   </application>

@@ -10,7 +10,9 @@ import { GoogleSignin } from '@react-native-google-signin/google-signin';
 
 // Configure Google Sign In
 GoogleSignin.configure({
-  webClientId: '901253797103-junvsn505fphigf2i9pssh7tnisrnnse.apps.googleusercontent.com', // Your web client ID
+  webClientId: '901253797103-junvsn505fphigf2i9pssh7tnisrnnse.apps.googleusercontent.com',
+  offlineAccess: true,
+  scopes: ['profile', 'email'],
 });
 
 // 🔥 Sign Up a New User

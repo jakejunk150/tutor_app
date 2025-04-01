@@ -1,4 +1,4 @@
-package com.anonymous.tutor_app
+package com.medschoolspace.app
 import expo.modules.splashscreen.SplashScreenManager
 
 import android.os.Build

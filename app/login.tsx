@@ -15,7 +15,7 @@ export default function LoginScreen() {
     try {
       await signIn(email, password);
       Alert.alert("Welcome Back!", "You are now logged in.");
-      router.push("/(tabs)/home"); // Redirect to home after login
+      router.replace("/"); // Navigate to root
     } catch (err: any) {
       setError(err.message || "An error occurred during sign in");
     }
@@ -26,7 +26,7 @@ export default function LoginScreen() {
     try {
       await signInWithGoogle();
       Alert.alert("Welcome!", "You are now logged in with Google.");
-      router.push("/(tabs)/home");
+      router.replace("/"); // Navigate to root
     } catch (err: any) {
       setError(err.message || "An error occurred during Google sign in");
     }

@@ -14,9 +14,9 @@ export default function CreateAccountScreen() {
     try {
       await signUp(email, password);
       Alert.alert("Success!", "Account created. You are now logged in.");
-      router.push("/(tabs)/home"); // Redirect to home after sign-up
-    } catch (err) {
-      setError(err.message);
+      router.replace("/"); // Navigate to root
+    } catch (err: any) {
+      setError(err.message || "An error occurred during sign up");
     }
   };
 

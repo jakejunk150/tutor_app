@@ -1,4 +1,4 @@
-package com.anonymous.tutor_app
+package com.medschoolspace.app
 
 import android.app.Application
 import android.content.res.Configuration
