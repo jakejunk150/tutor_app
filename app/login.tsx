@@ -4,11 +4,31 @@ import { useRouter } from "expo-router";
 import { signIn, signInWithGoogle } from "@/authService"; // Firebase auth functions
 import { FontAwesome } from '@expo/vector-icons';
 
+import * as WebBrowser from 'expo-web-browser';
+import * as Google from 'expo-auth-session/providers/google';
+import { makeRedirectUri } from 'expo-auth-session';
+import { GoogleAuthProvider, signInWithCredential } from 'firebase/auth';
+import { auth } from '@/firebaseConfig';
+
+WebBrowser.maybeCompleteAuthSession();
+
+
 export default function LoginScreen() {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+
+  const [request, response, promptAsync] = Google.useAuthRequest({
+    clientId: '901253797103-junvsn505fphigf2i9pssh7tnisrnnse.apps.googleusercontent.com',
+    iosClientId: '901253797103-junvsn505fphigf2i9pssh7tnisrnnse.apps.googleusercontent.com',
+    androidClientId: '901253797103-junvsn505fphigf2i9pssh7tnisrnnse.apps.googleusercontent.com',
+    redirectUri: makeRedirectUri({
+      scheme: 'myapp',
+    }),
+    useProxy: true,
+  });
+  
 
   const handleSignIn = async () => {
     setError("");
@@ -24,13 +44,25 @@ export default function LoginScreen() {
   const handleGoogleSignIn = async () => {
     setError("");
     try {
-      await signInWithGoogle();
-      Alert.alert("Welcome!", "You are now logged in with Google.");
-      router.replace("/"); // Navigate to root
+      const result = await promptAsync();
+  
+      if (result?.type === "success") {
+        const idToken = result.authentication?.idToken;
+  
+        if (!idToken) throw new Error("No ID token returned from Google");
+  
+        await signInWithGoogle(idToken); // still uses your authService helper
+        Alert.alert("Welcome!", "You are now logged in with Google.");
+        router.replace("/");
+      } else {
+        throw new Error("Google sign-in was cancelled or failed.");
+      }
     } catch (err: any) {
+      console.error("Google Sign In Error:", err.message);
       setError(err.message || "An error occurred during Google sign in");
     }
   };
+  
 
   return (
     <View style={styles.container}>
@@ -59,10 +91,15 @@ export default function LoginScreen() {
         <View style={styles.divider} />
       </View>
 
-      <TouchableOpacity style={styles.googleButton} onPress={handleGoogleSignIn}>
+      <TouchableOpacity 
+        style={[styles.googleButton, !request && { opacity: 0.5 }]} 
+        onPress={handleGoogleSignIn}
+        disabled={!request}
+      >
         <FontAwesome name="google" size={20} color="white" style={styles.googleIcon} />
         <Text style={styles.googleButtonText}>Sign in with Google</Text>
       </TouchableOpacity>
+
 
       {error ? <Text style={styles.error}>{error}</Text> : null}
     </View>
